@@ -2,6 +2,7 @@
 import * as fs from 'node:fs'
 import { createFileRoute, useRouter } from '@tanstack/react-router'
 import { createServerFn } from '@tanstack/react-start'
+import { Person, greet } from '../../server/functions'
 
 const filePath = 'count.txt'
 
@@ -17,6 +18,7 @@ const getCount = createServerFn({
   return readCount()
 })
 
+
 const updateCount = createServerFn({ method: 'POST' })
   .validator((d: number) => d)
   .handler(async ({ data }) => {
@@ -29,20 +31,25 @@ export const Route = createFileRoute('/')({
   loader: async () => await getCount(),
 })
 
+
 function Home() {
   const router = useRouter()
   const state = Route.useLoaderData()
+  // const greetings = await greet({ data: { name: "Alfonzo", surname: "Signorini" } })
 
   return (
-    <button
-      type="button"
-      onClick={() => {
-        updateCount({ data: 1 }).then(() => {
-          router.invalidate()
-        })
-      }}
-    >
-      Add 1 to {state}?
-    </button>
+    <>
+      <button
+        type="button"
+        onClick={() => {
+          updateCount({ data: 1 }).then(() => {
+            router.invalidate()
+          })
+        }}
+      >
+        Add 1 to {state}?
+      </button>
+      {/* <div>{greetings}</div> */}
+    </>
   )
 }

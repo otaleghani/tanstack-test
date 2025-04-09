@@ -12,12 +12,75 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as IndexImport } from './routes/index'
+import { Route as StreamingIndexImport } from './routes/streaming/index'
+import { Route as StaticIndexImport } from './routes/static/index'
+import { Route as RedirectIndexImport } from './routes/redirect/index'
+import { Route as QueringIndexImport } from './routes/quering/index'
+import { Route as MiddlewareIndexImport } from './routes/middleware/index'
+import { Route as FormIndexImport } from './routes/form/index'
+import { Route as ErrorsIndexImport } from './routes/errors/index'
+import { Route as ContextIndexImport } from './routes/context/index'
+import { Route as R404IndexImport } from './routes/404/index'
 
 // Create/Update Routes
 
 const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const StreamingIndexRoute = StreamingIndexImport.update({
+  id: '/streaming/',
+  path: '/streaming/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const StaticIndexRoute = StaticIndexImport.update({
+  id: '/static/',
+  path: '/static/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const RedirectIndexRoute = RedirectIndexImport.update({
+  id: '/redirect/',
+  path: '/redirect/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const QueringIndexRoute = QueringIndexImport.update({
+  id: '/quering/',
+  path: '/quering/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const MiddlewareIndexRoute = MiddlewareIndexImport.update({
+  id: '/middleware/',
+  path: '/middleware/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const FormIndexRoute = FormIndexImport.update({
+  id: '/form/',
+  path: '/form/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const ErrorsIndexRoute = ErrorsIndexImport.update({
+  id: '/errors/',
+  path: '/errors/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const ContextIndexRoute = ContextIndexImport.update({
+  id: '/context/',
+  path: '/context/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const R404IndexRoute = R404IndexImport.update({
+  id: '/404/',
+  path: '/404/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -32,6 +95,69 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
+    '/404/': {
+      id: '/404/'
+      path: '/404'
+      fullPath: '/404'
+      preLoaderRoute: typeof R404IndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/context/': {
+      id: '/context/'
+      path: '/context'
+      fullPath: '/context'
+      preLoaderRoute: typeof ContextIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/errors/': {
+      id: '/errors/'
+      path: '/errors'
+      fullPath: '/errors'
+      preLoaderRoute: typeof ErrorsIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/form/': {
+      id: '/form/'
+      path: '/form'
+      fullPath: '/form'
+      preLoaderRoute: typeof FormIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/middleware/': {
+      id: '/middleware/'
+      path: '/middleware'
+      fullPath: '/middleware'
+      preLoaderRoute: typeof MiddlewareIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/quering/': {
+      id: '/quering/'
+      path: '/quering'
+      fullPath: '/quering'
+      preLoaderRoute: typeof QueringIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/redirect/': {
+      id: '/redirect/'
+      path: '/redirect'
+      fullPath: '/redirect'
+      preLoaderRoute: typeof RedirectIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/static/': {
+      id: '/static/'
+      path: '/static'
+      fullPath: '/static'
+      preLoaderRoute: typeof StaticIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/streaming/': {
+      id: '/streaming/'
+      path: '/streaming'
+      fullPath: '/streaming'
+      preLoaderRoute: typeof StreamingIndexImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -39,32 +165,108 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/404': typeof R404IndexRoute
+  '/context': typeof ContextIndexRoute
+  '/errors': typeof ErrorsIndexRoute
+  '/form': typeof FormIndexRoute
+  '/middleware': typeof MiddlewareIndexRoute
+  '/quering': typeof QueringIndexRoute
+  '/redirect': typeof RedirectIndexRoute
+  '/static': typeof StaticIndexRoute
+  '/streaming': typeof StreamingIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/404': typeof R404IndexRoute
+  '/context': typeof ContextIndexRoute
+  '/errors': typeof ErrorsIndexRoute
+  '/form': typeof FormIndexRoute
+  '/middleware': typeof MiddlewareIndexRoute
+  '/quering': typeof QueringIndexRoute
+  '/redirect': typeof RedirectIndexRoute
+  '/static': typeof StaticIndexRoute
+  '/streaming': typeof StreamingIndexRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
+  '/404/': typeof R404IndexRoute
+  '/context/': typeof ContextIndexRoute
+  '/errors/': typeof ErrorsIndexRoute
+  '/form/': typeof FormIndexRoute
+  '/middleware/': typeof MiddlewareIndexRoute
+  '/quering/': typeof QueringIndexRoute
+  '/redirect/': typeof RedirectIndexRoute
+  '/static/': typeof StaticIndexRoute
+  '/streaming/': typeof StreamingIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/404'
+    | '/context'
+    | '/errors'
+    | '/form'
+    | '/middleware'
+    | '/quering'
+    | '/redirect'
+    | '/static'
+    | '/streaming'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/404'
+    | '/context'
+    | '/errors'
+    | '/form'
+    | '/middleware'
+    | '/quering'
+    | '/redirect'
+    | '/static'
+    | '/streaming'
+  id:
+    | '__root__'
+    | '/'
+    | '/404/'
+    | '/context/'
+    | '/errors/'
+    | '/form/'
+    | '/middleware/'
+    | '/quering/'
+    | '/redirect/'
+    | '/static/'
+    | '/streaming/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  R404IndexRoute: typeof R404IndexRoute
+  ContextIndexRoute: typeof ContextIndexRoute
+  ErrorsIndexRoute: typeof ErrorsIndexRoute
+  FormIndexRoute: typeof FormIndexRoute
+  MiddlewareIndexRoute: typeof MiddlewareIndexRoute
+  QueringIndexRoute: typeof QueringIndexRoute
+  RedirectIndexRoute: typeof RedirectIndexRoute
+  StaticIndexRoute: typeof StaticIndexRoute
+  StreamingIndexRoute: typeof StreamingIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  R404IndexRoute: R404IndexRoute,
+  ContextIndexRoute: ContextIndexRoute,
+  ErrorsIndexRoute: ErrorsIndexRoute,
+  FormIndexRoute: FormIndexRoute,
+  MiddlewareIndexRoute: MiddlewareIndexRoute,
+  QueringIndexRoute: QueringIndexRoute,
+  RedirectIndexRoute: RedirectIndexRoute,
+  StaticIndexRoute: StaticIndexRoute,
+  StreamingIndexRoute: StreamingIndexRoute,
 }
 
 export const routeTree = rootRoute
@@ -77,11 +279,47 @@ export const routeTree = rootRoute
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
-        "/"
+        "/",
+        "/404/",
+        "/context/",
+        "/errors/",
+        "/form/",
+        "/middleware/",
+        "/quering/",
+        "/redirect/",
+        "/static/",
+        "/streaming/"
       ]
     },
     "/": {
       "filePath": "index.tsx"
+    },
+    "/404/": {
+      "filePath": "404/index.tsx"
+    },
+    "/context/": {
+      "filePath": "context/index.tsx"
+    },
+    "/errors/": {
+      "filePath": "errors/index.tsx"
+    },
+    "/form/": {
+      "filePath": "form/index.tsx"
+    },
+    "/middleware/": {
+      "filePath": "middleware/index.tsx"
+    },
+    "/quering/": {
+      "filePath": "quering/index.tsx"
+    },
+    "/redirect/": {
+      "filePath": "redirect/index.tsx"
+    },
+    "/static/": {
+      "filePath": "static/index.tsx"
+    },
+    "/streaming/": {
+      "filePath": "streaming/index.tsx"
     }
   }
 }
