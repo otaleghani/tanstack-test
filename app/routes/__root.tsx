@@ -26,6 +26,7 @@ export const Route = createRootRoute({
     ],
   }),
   component: RootComponent,
+  notFoundComponent: () => (<div>NOT FOUND!!! STRINXIS</div>)
 })
 
 function RootComponent() {

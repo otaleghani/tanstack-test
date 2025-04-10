@@ -1,7 +1,7 @@
 // app/routes/index.tsx
 import * as fs from 'node:fs'
-import { createFileRoute, useRouter } from '@tanstack/react-router'
-import { createServerFn } from '@tanstack/react-start'
+import { createFileRoute, Link, useRouter } from '@tanstack/react-router'
+import { createServerFn, useServerFn } from '@tanstack/react-start'
 import { Person, greet } from '../../server/functions'
 
 const filePath = 'count.txt'
@@ -33,9 +33,11 @@ export const Route = createFileRoute('/')({
 
 
 function Home() {
-  const router = useRouter()
   const state = Route.useLoaderData()
-  // const greetings = await greet({ data: { name: "Alfonzo", surname: "Signorini" } })
+  const greetDue = useServerFn(greet)
+  const router = useRouter()
+
+  // const greetings = greetDue({ data: { name: "Alfonzo", surname: "Signorini" } })
 
   return (
     <>
@@ -50,6 +52,7 @@ function Home() {
         Add 1 to {state}?
       </button>
       {/* <div>{greetings}</div> */}
+      <Link to='/cache'>Vai cache</Link>
     </>
   )
 }
