@@ -5,6 +5,11 @@ import { setHeaders } from 'vinxi/http'
 
 export const Route = createFileRoute('/context/')({
   component: RouteComponent,
+  loader: ({ context }) => {
+    return {
+      user: context.user
+    }
+  }
 })
 
 const readRequest = createServerFn({ method: "GET" })
@@ -31,6 +36,8 @@ const writeHeaders = createServerFn({ method: "GET", response: "full" })
   })
 
 function RouteComponent() {
+  const { user } = Route.useLoaderData();
+
   return (
     <>
       <div>Hello "/context/"!</div>
@@ -48,6 +55,8 @@ function RouteComponent() {
         const res = await writeHeaders();
         console.log(res.context)
       }}>Write headers</button>
+
+      <div>{user}</div>
     </>
   )
 }

@@ -19,6 +19,7 @@ import { Route as StaticIndexImport } from './routes/static/index'
 import { Route as RedirectIndexImport } from './routes/redirect/index'
 import { Route as QueringIndexImport } from './routes/quering/index'
 import { Route as MiddlewareIndexImport } from './routes/middleware/index'
+import { Route as MaskingIndexImport } from './routes/masking/index'
 import { Route as HeadIndexImport } from './routes/head/index'
 import { Route as FormIndexImport } from './routes/form/index'
 import { Route as ErrorsIndexImport } from './routes/errors/index'
@@ -77,6 +78,12 @@ const QueringIndexRoute = QueringIndexImport.update({
 const MiddlewareIndexRoute = MiddlewareIndexImport.update({
   id: '/middleware/',
   path: '/middleware/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const MaskingIndexRoute = MaskingIndexImport.update({
+  id: '/masking/',
+  path: '/masking/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -220,6 +227,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HeadIndexImport
       parentRoute: typeof rootRoute
     }
+    '/masking/': {
+      id: '/masking/'
+      path: '/masking'
+      fullPath: '/masking'
+      preLoaderRoute: typeof MaskingIndexImport
+      parentRoute: typeof rootRoute
+    }
     '/middleware/': {
       id: '/middleware/'
       path: '/middleware'
@@ -338,6 +352,7 @@ export interface FileRoutesByFullPath {
   '/errors': typeof ErrorsIndexRoute
   '/form': typeof FormIndexRoute
   '/head': typeof HeadIndexRoute
+  '/masking': typeof MaskingIndexRoute
   '/middleware': typeof MiddlewareIndexRoute
   '/quering': typeof QueringIndexRoute
   '/redirect': typeof RedirectIndexRoute
@@ -360,6 +375,7 @@ export interface FileRoutesByTo {
   '/errors': typeof ErrorsIndexRoute
   '/form': typeof FormIndexRoute
   '/head': typeof HeadIndexRoute
+  '/masking': typeof MaskingIndexRoute
   '/middleware': typeof MiddlewareIndexRoute
   '/quering': typeof QueringIndexRoute
   '/redirect': typeof RedirectIndexRoute
@@ -383,6 +399,7 @@ export interface FileRoutesById {
   '/errors/': typeof ErrorsIndexRoute
   '/form/': typeof FormIndexRoute
   '/head/': typeof HeadIndexRoute
+  '/masking/': typeof MaskingIndexRoute
   '/middleware/': typeof MiddlewareIndexRoute
   '/quering/': typeof QueringIndexRoute
   '/redirect/': typeof RedirectIndexRoute
@@ -407,6 +424,7 @@ export interface FileRouteTypes {
     | '/errors'
     | '/form'
     | '/head'
+    | '/masking'
     | '/middleware'
     | '/quering'
     | '/redirect'
@@ -428,6 +446,7 @@ export interface FileRouteTypes {
     | '/errors'
     | '/form'
     | '/head'
+    | '/masking'
     | '/middleware'
     | '/quering'
     | '/redirect'
@@ -449,6 +468,7 @@ export interface FileRouteTypes {
     | '/errors/'
     | '/form/'
     | '/head/'
+    | '/masking/'
     | '/middleware/'
     | '/quering/'
     | '/redirect/'
@@ -471,6 +491,7 @@ export interface RootRouteChildren {
   ErrorsIndexRoute: typeof ErrorsIndexRoute
   FormIndexRoute: typeof FormIndexRoute
   HeadIndexRoute: typeof HeadIndexRoute
+  MaskingIndexRoute: typeof MaskingIndexRoute
   MiddlewareIndexRoute: typeof MiddlewareIndexRoute
   QueringIndexRoute: typeof QueringIndexRoute
   RedirectIndexRoute: typeof RedirectIndexRoute
@@ -488,6 +509,7 @@ const rootRouteChildren: RootRouteChildren = {
   ErrorsIndexRoute: ErrorsIndexRoute,
   FormIndexRoute: FormIndexRoute,
   HeadIndexRoute: HeadIndexRoute,
+  MaskingIndexRoute: MaskingIndexRoute,
   MiddlewareIndexRoute: MiddlewareIndexRoute,
   QueringIndexRoute: QueringIndexRoute,
   RedirectIndexRoute: RedirectIndexRoute,
@@ -514,6 +536,7 @@ export const routeTree = rootRoute
         "/errors/",
         "/form/",
         "/head/",
+        "/masking/",
         "/middleware/",
         "/quering/",
         "/redirect/",
@@ -562,6 +585,9 @@ export const routeTree = rootRoute
     },
     "/head/": {
       "filePath": "head/index.tsx"
+    },
+    "/masking/": {
+      "filePath": "masking/index.tsx"
     },
     "/middleware/": {
       "filePath": "middleware/index.tsx"
