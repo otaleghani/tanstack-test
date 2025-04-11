@@ -27,7 +27,7 @@ const getData = createServerFn({ method: "GET" })
 
 export const Route = createFileRoute('/cache/')({
   beforeLoad: () => {
-    sus: () => { return "sas" }
+    sus: () => console.info("susa")
   },
   validateSearch: zodValidator(searchSchema),
   component: RouteComponent,
